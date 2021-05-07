@@ -1,13 +1,11 @@
-import './App.css';
-import firebase from './config/config.js';
+import './../App.css';
+import firebase from './../config/config.js';
 import React from 'react';
-import ListElement from './components/listElement.js';
-import CustomNav from './components/navBar.js';
+import ListElement from './../components/listElement.js';
+import Accord from './../components/Accordion.js';
+import CustomNav from './../components/navBar.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Accordion } from 'react-bootstrap';
-import { BrowserRouter, Route, Switch} from 'react-router-dom'
-import ApiPage from './views/apiPage.js'
-import Main from './views/main.js'
 
 
 export default function App(){
@@ -38,8 +36,7 @@ React.useEffect(() => {
 
 if (data==null){
   return(
-        <div>
-          <CustomNav />
+        <div className="App">
           <div>
             <p>
               Loading...
@@ -48,24 +45,22 @@ if (data==null){
         </div>
   );
 }
-else{
+else{  
 
+    
   let coins = Object.keys(data);
   
   const listItems = coins.map((ind_coin) => 
-    <ListElement tag={ String( coins.indexOf(ind_coin)) } image={data[ind_coin]["image_uri"]} title={ind_coin} info={data[ind_coin]["info"]} />
-  );
-
-  return(
-      <div>
-        <CustomNav />
-        <Switch>
-          <Route path="/" exact component={Main} />
-          <Route path="/api" component={ApiPage} />
-        </Switch>
-        {/* <div>Words..</div> */}
-      </div>
+  <ListElement tag={ String( coins.indexOf(ind_coin)) } image={data[ind_coin]["image_uri"]} title={ind_coin} info={data[ind_coin]["info"]} />
 );
 
+  return(
+  <Accord data={data} />
+  );
 }
 }
+
+
+      // <Accordion style={{width:"60%"}} defaultActiveKey="">
+      //     {listItems}
+      //   </Accordion>
