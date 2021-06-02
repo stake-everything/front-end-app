@@ -1,5 +1,5 @@
 import './../App.css';
-import firebase from './../config/config.js';
+import {db} from './../config/config.js';
 import React from 'react';
 import ListElement from './../components/listElement.js';
 import Accord from './../components/Accordion.js';
@@ -13,7 +13,7 @@ export default function App(){
 const [data,setData] = React.useState(null);
 
 const loadData = () => {
-  const dbRef = firebase.database().ref();
+  const dbRef = db.ref();
   dbRef.child("coins").get().then((snapshot) => {
     if (snapshot.exists()) {
       setData( snapshot.val() )
