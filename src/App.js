@@ -9,6 +9,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Main from './views/main.js'
 
 export default function App(){
+
+
     return(
         <div className="App">
           <Banner />

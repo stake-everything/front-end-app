@@ -34,12 +34,17 @@ const DropdownListGroup = (props) => {
 
     let INFO = props.info;
 
+    // console.log("here")
+    // console.log( INFO )
+    // console.log( props._item )
+    // console.log(props.histData)
+
     const listItems = INFO.map((ind_site) =>
     //   <InsideListElement site={site.site} url={site.url} apry_val={ site.apr ? "APR" : "APY" } apry_val={ site.apr ? site.apr : site.apy } />
       (
       <>
       <InsideListElementData site={ind_site.site} url={ind_site.url} token_earned={ind_site.token_earned} apry={ ind_site.apr ? "APR" : "APY" } apry_val={ ind_site.apr ? ind_site.apr : ind_site.apy } />
-      <LineChart histData={ props.histData } tag={ind_site.tag} _item={props._item} />
+      <LineChart histData={ props.histData[ ind_site.tag ][ props._item ]  } />
       </>
       )
     );
@@ -54,25 +59,24 @@ const DropdownListGroup = (props) => {
 
 const Accordion = (props) => {
 
-
-  const avg_return=(a)=>{
-    let s=0;
-
-    for (let i=0;i<a.length;i++){
-      if (  Object.keys( a[i] ).includes("apy")  ){s=s+a[i]["apy"]}
-      else if (  Object.keys( a[i] ).includes("apr")  ){s=s+a[i]["apr"]}
-      else{s=s+0}
-    }
-    return( (s/a.length).toFixed(1) );
-  }
-
   const [clicked, setClicked] = useState(null);
 
 
   let data = props.data;
   let coins = Object.keys(data);
 
-  console.log(data)
+
+  // let resizeSection = () =>{
+  //   let f = coins.length;
+  //   let h;
+    
+  //   if (f>10){
+  //     let nOi = clicked==null ? 0 : 1;
+  //     h = String( f*(46.3 + 5.3*nOi) )+"px"
+  //   }
+  //   else{h="60vh"}
+  //   return h;
+  // }
 
   const toggle = index => {
     if (clicked === index) {
@@ -82,10 +86,12 @@ const Accordion = (props) => {
 
     setClicked(index);
   };
+
+  let hi =resizeSection()
   
   return (
     <IconContext.Provider value={{ color: 'black', size: '25px' }}>
-      <div style={{height: "100%" }} className="List-section">
+      <div style={{height: hi }} className="List-section">
       {/* <div className="List-section"> */}
         <div className="Cont">
           {
@@ -103,7 +109,7 @@ const Accordion = (props) => {
                         className="d-inline-block align-top"
                     />
                   {/* <div className="Coin-title"><p><b>{item}</b></p></div> */}
-                  <h6 className="Coin-title"><b>{item} - { avg_return( data[item]["info"] ) }%  </b></h6>
+                  <h6 className="Coin-title"><b>{ "jim" } - </b></h6>
                  </div>
                   <span>{clicked === index ? <FiMinus /> : <FiPlus />}</span>
                 </div>
@@ -143,16 +149,3 @@ export default Accordion;
 // //     font-size: 2rem;
 // //   }
 // `;
-
-
-// let resizeSection = () =>{
-//   let f = coins.length;
-//   let h;
-  
-//   if (f>10){
-//     let nOi = clicked==null ? 0 : 1;
-//     h = String( f*(46.3 + 5.3*nOi) )+"px"
-//   }
-//   else{h="60vh"}
-//   return h;
-// }
