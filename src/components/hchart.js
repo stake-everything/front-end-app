@@ -1,4 +1,5 @@
 import { Line,defaults } from 'react-chartjs-2';
+import styles from './../App.css';
 
 defaults.font.family = "Nunito";
 
