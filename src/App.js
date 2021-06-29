@@ -19,11 +19,3 @@ export default function App(){
         </div>
   );
   }
-
-
-
-//   <Switch>
-//   <Route path="/" exact component={Main} />
-//   <Route path="/api" component={ApiPage} />
-// </Switch>
-// {/* <div>Words..</div> */}
